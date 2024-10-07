@@ -1,6 +1,15 @@
 import React from 'react';
 
 const ProductCard = () => {
+
+  // 제품 데이터 받아오기
+  // onClick시 Detail 페이지로 이동
+  /* const showDetail = () => {
+    navigate(`/products/${item.id}`, {
+      state : item
+    });
+  }; */
+
   return (
     <div style={{ 
       border: '1px solid #ddd', 
