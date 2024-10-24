@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import logo from './../jle_logo.jpg';
+import logo from './../../jle_logo.jpg';
 import { Button, Box, Grid,Typography, IconButton, Stack } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
@@ -21,6 +21,10 @@ const Header = () => {
     const goToHome=()=>{
         navigate("/");
     };
+    const goToCate = (index) => {
+        // index는 배열의 인덱스, 이를 cate_no로 사용
+        navigate(`/category/cate_no/${index + 1}`); // cate_no는 1부터 시작하도록 설정
+      };
 
     return (
         <Box sx={{flexDirection:'column'}}>
@@ -66,13 +70,18 @@ const Header = () => {
             <Box sx={{ flexGrow: 1, padding: 1 }}>
                 <Grid container spacing={0.5}>
                     {menuItems.map((item, index) => (
-                    <Grid item xs={3} key={index}> {/* 모바일에서도 4칸씩 배치 */}
-                        <Box
+                    <Grid item xs={3} key={index} sx={{ 
+                        display: 'flex', 
+                        justifyContent: 'center', 
+                        alignItems: 'center'}}> {/* 모바일에서도 4칸씩 배치 */}
+                        <Button
+                        onClick={() => goToCate(index)}
                         sx={{
                             display: 'flex',
                             justifyContent: 'center',
                             alignItems: 'center',
                             height: '80%',
+                            width:"90%",
                             padding: 1,
                             border: '1px solid #ddd',
                             borderRadius: '4px',
@@ -85,12 +94,13 @@ const Header = () => {
                         <Typography
                             variant="body1"
                             sx={{
+                            color:"black",
                             fontSize: '0.575rem', // 모바일에서의 폰트 크기 조정
                             }}
                         >
                             {item}
                         </Typography>
-                        </Box>
+                        </Button>
                     </Grid>
                     ))}
                 </Grid>

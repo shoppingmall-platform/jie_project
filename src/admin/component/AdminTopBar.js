@@ -1,69 +1,107 @@
-import * as React from 'react';
+import {React, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import {AppBar, Box, Toolbar, IconButton, Typography, Container, Avatar, Button, Tooltip} from '@mui/material';
+import {AppBar, Toolbar, IconButton, Typography, Container, Avatar, Box} from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
-const pages = ['상품관리', '고객관리', '주문/배송'];
+import "./../Admin.css"
+const menuItems = [
+  {
+    id: "products",
+    label: "상품",
+    link: "./products",  
+    subItems: [
+      { label: "상품 목록", link: "./products/list" },
+      { label: "상품 등록", link: "./products/add" },
+      { label: "상품 관리", link: "./products/manage" },
+      { label: "카테고리", link: "./products/categories" }
+    ]
+  },
+  {
+    id: "customers",
+    label: "고객",
+    link: "./customers",  
+    subItems: [
+      { label: "고객 조회", link: "./customers/list" },
+      { label: "고객 관리", link: "./customers/manage" }
+    ]
+  },
+  {
+    id: "orders",
+    label: "주문/배송",
+    link: "./orders",  
+    subItems: [
+      { label: "주문 조회", link: "./orders/list" },
+      { label: "배송 관리", link: "./orders/delivery" },
+      { label: "취소 관리", link: "./orders/cancel" }
+    ]
+  }
+];
 
 function AdminTopBar() {
   const navigate = useNavigate();  
-  const handleNavigation = (page) => {
-    switch (page) {
-      case '상품관리':
-        navigate('/admin/products');
-        break;
-      case '고객관리':
-        navigate('/admin/users');
-        break;
-      case '주문/배송':
-        navigate('/admin/orders');
-        break;
-      
-      default:
-        break;
-    }
+  const [dropdownOpen, setDropdownOpen] = useState(false)
+  const handleNavigation = (link) => {
+    navigate(link)
+  };
+  const handleMouseEnter = () => {
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    setDropdownOpen(false);
   };
 
   return (
-    <AppBar position="static" sx={{ backgroundColor: 'white', color: 'black' }}>
+    <AppBar position="static"  sx={{backgroundColor:'white',color:'black'}}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar 
+          disableGutters 
+          onMouseEnter={handleMouseEnter} 
+          onMouseLeave={handleMouseLeave} 
+        >
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="/admin"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'black',
-              textDecoration: 'none',
-            }}
+            className="logo"
           >
             Admin
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => handleNavigation(page)}
-                sx={{ my: 2, color: 'black', display: 'block' }}
+          <div className="menu-box">
+            {menuItems.map((menuItem) => (
+              <button
+                key={menuItem.label}
+                className="menu-button"
+                onClick={() => handleNavigation(menuItem.link)}
               >
-                {page}
-              </Button>
+                {menuItem.label}
+              </button>
             ))}
-          </Box>
+          </div>
+          {dropdownOpen && (
+            <div className="dropdown">
+              {menuItems.map((menuItem) => (
+                <div key={menuItem.label} className="dropdown-column">
+                  {menuItem.subItems.map((subItem) => (
+                    <button
+                      key={subItem.label}
+                      onClick={() => handleNavigation(subItem.link)}
+                      className="dropdown-item"
+                    >
+                      {subItem.label}
+                    </button>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip>
-              <IconButton href="/" sx={{ p: 2 }}>
-                <HomeIcon />
-              </IconButton>
-              <IconButton sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="https://i1.sndcdn.com/artworks-Z5SLEGyINrvdjrkz-CQbgFA-t500x500.jpg" />
-              </IconButton>
-            </Tooltip>
+            <IconButton href="/" sx={{ p: 2 }}>
+              <HomeIcon />
+            </IconButton>
+            <IconButton sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="https://i1.sndcdn.com/artworks-Z5SLEGyINrvdjrkz-CQbgFA-t500x500.jpg" />
+            </IconButton>
           </Box>
         </Toolbar>
       </Container>

@@ -1,9 +1,7 @@
 import { Route, Routes, useLocation} from 'react-router-dom';
-import Header from './component/Header';
-import UserRoutes from './UserRoutes';
+import Header from './user/component/Header';
+import UserRoutes from './user/UserRoutes';
 import Admin from './admin/Admin';
-//import ProductDetail from './page/ProductDetail';
-
 
 function App() {
   //let [authenticate, setAuthenticate] = useState(false);
