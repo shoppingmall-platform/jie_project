@@ -1,16 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import logo from './../../jle_logo.jpg';
-import { Button, Box, Grid,Typography, IconButton, Stack } from '@mui/material';
+import { Divider, Button, Box, Grid,Typography, IconButton, Stack, ThemeProvider,} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import ShoppingBagOutlinedIcon from '@mui/icons-material/ShoppingBagOutlined';
-// 메뉴 버튼 (mui Drawer)   user 아이콘 (로그인페이지 연결)   
-// 로고(버튼 home page로 이동)      장바구니     검색 
-// 
+import { Drawer } from '../../portal';
+import MainDrawer from './MainDrawer';
+
+
+
+//menuItems -> category 대분류 ?
 
 const Header = () => {
+    const [isDrawerOpen, setDrawerOpen] = useState(false);
     const menuItems = [
         'Best', '[당일발송]', '머슬핏', 'New 5%', 'All', 'Outer', 'Top', 'Shirts', 'Bottom', 'ACC', 'Shoes','[MADE]',  '휴양룩'
       ];
@@ -21,24 +25,30 @@ const Header = () => {
     const goToHome=()=>{
         navigate("/");
     };
+    
     const goToCate = (index) => {
         // index는 배열의 인덱스, 이를 cate_no로 사용
         navigate(`/category/cate_no/${index + 1}`); // cate_no는 1부터 시작하도록 설정
       };
+
 
     return (
         <Box sx={{flexDirection:'column'}}>
             <Box 
                 sx={{
                     display:'flex', 
+                    position:'fixed',
+                    backgroundColor:'white',
                     alignItems:'center',
                     justifyContent:'space-between',
                     padding:1.5,
+                    zIndex:1,
                     width:"100%"
                     }}>
                 <Stack  direction='row' spacing={3}>
                     <IconButton
                     sx={{color:'black'}}
+                    onClick={() => setDrawerOpen(true)}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -48,6 +58,11 @@ const Header = () => {
                         <PersonOutlineOutlinedIcon />
                     </IconButton>
                 </Stack>
+        
+                <Drawer isOpen={isDrawerOpen} onClose={() => setDrawerOpen(false)} position="left">
+                    <MainDrawer/>
+                </Drawer>
+        
                 <Box sx={{display:'flex' }}>
                     <Button
                         onClick={goToHome} // 클릭 시 동작
@@ -66,8 +81,9 @@ const Header = () => {
                         <SearchIcon />
                     </IconButton>
                 </Stack>
+                
             </Box>
-            <Box sx={{ flexGrow: 1, padding: 1 }}>
+            <Box sx={{ flexGrow: 1, paddingTop:8, paddingInline:1, display:'flex'}}>
                 <Grid container spacing={0.5}>
                     {menuItems.map((item, index) => (
                     <Grid item xs={3} key={index} sx={{ 

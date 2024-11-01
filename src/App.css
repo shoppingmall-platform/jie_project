@@ -20,3 +20,66 @@
   width: 300px;
   height: 400px;
 }
+
+.card {
+  border: 1px solid #ddd;
+  padding: 3px;
+  margin: 3px;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+}
+
+/* Drawer Styles */
+.drawer-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* 왼쪽 또는 오른쪽 위치 지정 */
+.drawer-overlay.left {
+  left: 0;
+}
+
+.drawer-overlay.right {
+  right: 0;
+}
+
+.drawer-content {
+  background-color: white;
+  width: 280px;
+  max-width: 80%;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+  overflow-y: auto;
+}

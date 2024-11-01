@@ -4,6 +4,8 @@ import FolderIcon from '@mui/icons-material/Folder';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
+
+//이후 api 연결 후 통신
 const initialCategories = [
   { categoryId: 1, categoryParent: null, categoryName: '대분류1', categoryDepth: 1 },
   { categoryId: 2, categoryParent: 1, categoryName: '중분류1', categoryDepth: 2 },

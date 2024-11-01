@@ -3,14 +3,16 @@ import {React, useState, useMemo, useRef} from 'react'
 import ReactQuill, { Quill } from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { ImageActions } from '@xeger/quill-image-actions';
-import {ImageFormats }from '@xeger/quill-image-formats';
+import { ImageFormats }from '@xeger/quill-image-formats';
 
 Quill.register('modules/imageActions', ImageActions);
 Quill.register('modules/imageFormats', ImageFormats);
 
+
 const EditorBox = () => {
     const [value, setValue] = useState('');
     const quillRef = useRef();
+
     const handleSubmit = () => {
         console.log('상세설명 저장')
     }
@@ -47,7 +49,9 @@ const EditorBox = () => {
                     [{ align: [] }, { color: [] }, { background: [] }], 
                     ['clean'],
                 ],
+
             },
+            
         }
     }, []);
 
@@ -61,7 +65,7 @@ const EditorBox = () => {
             onChange={setValue}
             formats={formats}
             modules={modules}
-            style={{height:400, overflowY:'auto'}} />
+            style={{height:400 , overflowY:'auto'}} />
             <Button onClick={handleSubmit}>저장</Button>
         </div>
     )

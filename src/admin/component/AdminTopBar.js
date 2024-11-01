@@ -95,7 +95,7 @@ function AdminTopBar() {
               ))}
             </div>
           )}
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ }}>
             <IconButton href="/" sx={{ p: 2 }}>
               <HomeIcon />
             </IconButton>

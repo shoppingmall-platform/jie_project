@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import ProductCard from '../component/ProductCard';
 import { Divider } from '@mui/material';
 import ItemWrapper from '../component/home/ItemWrapper'
+import ItemSlide from '../component/home/ItemSlide';
 
 //메인 사진 계속 바뀌게 - 그냥 이미지 파일 
 //Weekly best item - 사진 3개 , 계속 바뀌게  크기는 조금 작음
@@ -14,22 +15,13 @@ const Home = () => {
   return (
     <div>
       <img src='https://cafe24.poxo.com/ec01/gwon3066/YepDBcpQi6F1EGuL9rzRwZlbyEg6QdanrR8cpMvEWIm1IPaEK0ju5UMWMuWxeVhPwhgNLWVqAtSDW9gvkeTqgw==/_/web/product/big/202405/f7949c909d65f6545f0b5bdf76fd2c3e.gif'
-        style={{ width: '100%', height: '400px', objectFit: 'cover' }} />
-      <div style={{ fontSize: '10px', textAlign: 'center' }}>WEEKLY BEST ITEM</div>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)'
-      }}>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-      </div>
+        style={{ marginTop:'5px', width: '100%', height: '100%', objectFit: 'cover' }} />
+      <div style={{ margin:'5px',fontSize: '15px', textAlign: 'center' }}>WEEKLY BEST ITEM</div>
+      <ItemSlide/>
       <Divider />
       <ItemWrapper title='Best Item' products={Array} />
       <Divider />
       <ItemWrapper title='New Item' products={Array} />
-
-
     </div >
   );
 }

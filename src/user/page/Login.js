@@ -1,5 +1,6 @@
 import { Divider, Box, Button, Checkbox, Container, FormControlLabel,Grid, TextField, Typography } from '@mui/material';
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import AppleIcon from '@mui/icons-material/Apple';
 //아이디와 비밀번호를 입력해야 로그인버튼 활성화
@@ -7,6 +8,11 @@ import AppleIcon from '@mui/icons-material/Apple';
 //로그인 성공 시 페이지 이동
 
 const Login = () => {
+  const navigate = useNavigate()
+
+  const goToSignup=()=>{
+    navigate("/signup");
+  };  
   //theme
   return (
     <Container maxWidth="xs">
@@ -50,12 +56,12 @@ const Login = () => {
             />
             <Button 
               fullWidth 
-              sx={{margin:'10px', backgroundColor:'black', color:'white', marginBottom:'20px'}}>
+              sx={{ backgroundColor:'#A3A09F', color:'white', marginBottom:2}}>
                 Login
             </Button>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Button fullWidth> 회원가입 </Button>
+                <Button fullWidth onClick={goToSignup}> 회원가입 </Button>
               </Grid>
               <Grid item xs={6}>
                 <Button fullWidth> 아이디 찾기 </Button>
