@@ -1,11 +1,17 @@
-import { OutlinedInput,InputAdornment, TextField, Box,InputLabel, Checkbox, FormGroup,Table, TableCell, TableRow , FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Select, MenuItem, Button} from '@mui/material'
+import { TextField, Box,InputLabel, Checkbox, FormGroup,Table, TableCell, 
+    TableRow , FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Select, 
+    MenuItem, Button} from '@mui/material'
 import {React, useState} from 'react'
-import EditorBox from '../../component/Editor';
-import UploadFile from '../../component/UploadFile';
-import { Label } from '@mui/icons-material';
+import EditorBox from '../../component/product/Editor';
+import UploadFile from '../../component/product/UploadFile';
+import OptionSettings from '../../component/product/OptionSettings';
+import BBox from '../../component/BBox';
+
 
 const ProductAdd = () => {
-    const [selectedValue, setSelectedValue] = useState(''); 
+    const [taxType, setTaxType] = useState(''); 
+    const [optionUsage, setOptionUsage] = useState('옵션사용안함');
+    const [stockUsage, setStockUsage] = useState("재고사용안함"); 
     const [supplyPrice, setSupplyPrice] = useState(0); // 공급가
     const [marginRate, setMarginRate] = useState(0); // 마진율
     const [additionalAmount, setAdditionalAmount] = useState(0); // 추가금액
@@ -14,9 +20,18 @@ const ProductAdd = () => {
     const [productPrice, setProductPrice] = useState(null); // 상품가
     const [taxAmount, setTaxAmount] = useState(null); //과세
 
-    const handleRadioChange = (event) => { //과세구분에서 과세상품 선택 시 과세율 박스 띄우기
-      setSelectedValue(event.target.value);
+    const handleTaxTypeChange = (event) => {
+        setTaxType(event.target.value);
     };
+    const handleOptionUsageChange = (event) => {
+        setOptionUsage(event.target.value);
+    };
+    const handleStockUsageChange = (event) => {
+        setStockUsage(event.target.value);
+    };
+
+    
+
     const handleCalculation = () => {
         const taxDecimal = taxRate / 100;
         const sellingPrice = supplyPrice + (supplyPrice * marginRate / 100) + additionalAmount; //판매가
@@ -47,13 +62,7 @@ const ProductAdd = () => {
           }}
         >
             <p style={{ fontSize: '25px' , marginLeft:'-60%'}}>상품 등록</p>
-            <Box sx={{
-            width: '70%',
-            height: 'auto',
-            borderRadius: 1,
-            bgcolor: '#dcdcdc',
-            marginTop: 2,
-            }}>    
+            <BBox width="70%" height="auto">    
                 <Table>
                 <TableRow sx={{fontSize:15}}><p style={{marginLeft:'15px', marginTop:'15px'}}>표시 상태 선택</p></TableRow>
                     <TableRow>
@@ -62,10 +71,10 @@ const ProductAdd = () => {
                                 <FormLabel id="demo-radio-buttons-group-label">판매상태</FormLabel>
                                 <RadioGroup
                                      aria-labelledby="demo-radio-buttons-group-label"
-                                     value={selectedValue} // Bind value to state
+                                     
                                      name="radio-buttons-group"
                                      sx={{ display: 'flex', flexDirection: 'row' }}
-                                     onChange={handleRadioChange} // Update state on change
+                                    
                                 >
                                     <FormControlLabel value="T" control={<Radio />} label="판매함" />
                                     <FormControlLabel value="F" control={<Radio />} label="판매안함" />
@@ -95,7 +104,7 @@ const ProductAdd = () => {
                             </FormControl>
                         </TableCell>
                     </TableRow>
-                    <TableRow sx={{fontSize:15}}><p style={{marginLeft:'15px'}}>카테고리 선택</p></TableRow>
+                    <TableRow sx={{fontSize:15}}><p style={{marginLeft:'15px', marginTop:'15px'}}>카테고리 선택</p></TableRow>
                     <TableRow>
                         <TableCell sx={{ display:'flex', flexDirection:'row'}}>
                             <FormControl size="small" fullWidth>
@@ -178,14 +187,8 @@ const ProductAdd = () => {
                         </TableCell>
                     </TableRow>
                 </Table>
-            </Box>
-            <Box sx={{
-            width: '70%',
-            height: 'auto',
-            borderRadius: 1,
-            bgcolor: '#dcdcdc',
-            marginTop: 2,
-            }}>
+            </BBox>
+            <BBox width="70%" height="auto"> 
                 <Table fullWidth>
                     <TableRow>
                         <TableCell align="center">상품명</TableCell>
@@ -236,14 +239,8 @@ const ProductAdd = () => {
                 </Table>
                 
                 
-            </Box>
-            <Box sx={{
-            width: '70%',
-            height: 'auto',
-            borderRadius: 1,
-            bgcolor: '#dcdcdc',
-            marginTop: 2,
-            }}>
+            </BBox>
+            <BBox width="70%" height="auto"> 
                 <Table>
                     <TableRow>
                     <TableCell align="center">소비자가</TableCell>
@@ -266,19 +263,17 @@ const ProductAdd = () => {
                                 defaultValue="display4"
                                 name="radio-buttons-group"
                                 sx={{ display:'flex', flexDirection:'row'}}
-                                onChange={handleRadioChange}
+                                onChange={handleTaxTypeChange}
                             >
                                 <FormControlLabel value="과세상품" control={<Radio />} label="과세상품" />
                                 <FormControlLabel value="영세상품" control={<Radio />} label="영세상품" />
                                 <FormControlLabel value="면세상품" control={<Radio />} label="면세상품" />
                             </RadioGroup>
-                            {selectedValue === "과세상품" && (
+                            {taxType === "과세상품" && (
                                 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                <OutlinedInput
+                                <TextField size="small" label='과세율(%)' type='number' 
                                     value={taxRate}
-                                    onChange={(e) => setTaxRate(Number(e.target.value))}
-                                    endAdornment={<InputAdornment position="end">%</InputAdornment>}
-                                />
+                                    onChange={(e) => setTaxRate(Number(e.target.value))}/>
                                 </FormControl>
                             )}
                         </FormControl>
@@ -287,12 +282,12 @@ const ProductAdd = () => {
                     <TableRow>
                         <TableCell align="center" >판매가 계산</TableCell>
                         <TableCell align='left'>
-                            <TextField size="small" label='마진율' type='number' 
+                            <TextField size="small" label='마진율(%)' type='number' 
                             value={marginRate}
                             onChange={(e) => setMarginRate(Number(e.target.value))}/>
                         </TableCell>
                         <TableCell align='left' >
-                            <TextField size="small" label='추가금액' type='number' 
+                            <TextField size="small" label='추가금액(원)' type='number' 
                             value={additionalAmount}
                             onChange={(e) => setAdditionalAmount(Number(e.target.value))} />
                         </TableCell>
@@ -319,7 +314,40 @@ const ProductAdd = () => {
 
                     </TableRow>
                     <TableRow>
-                        <TableCell align="center" >옵션/재고</TableCell>
+                        <TableCell align="center" >옵션사용</TableCell>
+                        <TableCell colSpan={3}>
+                            <RadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                defaultValue="display2"
+                                name="radio-buttons-group"
+                                sx={{ display:'flex', flexDirection:'row'}}
+                                onChange={handleOptionUsageChange}
+                            >
+                                <FormControlLabel value="옵션사용" control={<Radio />} label="사용함" />
+                                <FormControlLabel value="옵션사용안함" control={<Radio />} label="사용안함" />
+                            </RadioGroup>
+                            {optionUsage === "옵션사용" && <OptionSettings/>}
+                        </TableCell>
+
+                    </TableRow>
+                    <TableRow>
+                        <TableCell align="center" >재고사용</TableCell>
+                        <TableCell colSpan={3}>
+                            <RadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                defaultValue="display2"
+                                name="radio-buttons-group"
+                                sx={{ display:'flex', flexDirection:'row'}}
+                                onChange={handleStockUsageChange}
+                            >
+                                <FormControlLabel value="재고사용" control={<Radio />} label="사용함" />
+                                <FormControlLabel value="재고사용안함" control={<Radio />} label="사용안함" />
+                            </RadioGroup>
+                            {stockUsage === "재고사용" && (
+                                <TableCell>재고 사용할거라고?!!</TableCell>
+                            
+                            )}
+                        </TableCell>
 
                     </TableRow>
                     <TableRow>
@@ -334,7 +362,7 @@ const ProductAdd = () => {
                     </TableRow>
 
                 </Table>
-            </Box>
+            </BBox>
         <div style={{height:200}}/>
         </div>
       )

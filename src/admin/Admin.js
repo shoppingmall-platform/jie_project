@@ -7,10 +7,12 @@ import AdminDashboard from './page/AdminDashboard';
 import UserMain from './page/customers/CustomerMain';
 import ProductMain from './page/product/ProductMain';
 import OrderMain from './page/order/OrderMain';
+
 import ProductList from './page/product/ProductList';
 import ProductAdd from './page/product/ProductAdd';
 import ProductCategories from './page/product/ProductCategories';
 import ProductManage from './page/product/ProductManage';
+import ProductOptions from './page/product/ProductOptions';
 
 
 function Admin() {
@@ -30,6 +32,7 @@ function Admin() {
         <Route path="/products/add" element={<ProductAdd />} />
         <Route path="/products/manage" element={<ProductManage />} />
         <Route path="/products/categories" element={<ProductCategories />} />
+        <Route path="/products/options" element={<ProductOptions />} />
 {/*
         고객의 세부 메뉴 경로들 
         <Route path="/customers/list" element={<CustomerList />} />

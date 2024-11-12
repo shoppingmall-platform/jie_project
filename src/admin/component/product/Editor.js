@@ -26,7 +26,7 @@ const EditorBox = () => {
 
     const handleSubmit = async () => {
         const editorContent = quillRef.current.getEditor().root.innerHTML;
-        const images = editorContent.match(/(<img[^>]*src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g) || [];
+        const images = editorContent.match(/(<img[^>]*src\s*=\s*["']?([^>"']+)["']?[^>]*>)/g) || [];
         const updatedContent = await handleImageUpload(images, editorContent);
         console.log("서버로 보낼 HTML:", updatedContent); //나중에 여기다가 서버로 보내기, 함수는 따로 작성
     };
