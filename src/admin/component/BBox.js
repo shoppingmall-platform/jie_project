@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 
-const BBox = ({ children, width = '40%', height = '100%' }) => (
+const BBox = ({ children, width = '40%', height = '100%'}) => (
   <Box
     sx={{
       width: width,

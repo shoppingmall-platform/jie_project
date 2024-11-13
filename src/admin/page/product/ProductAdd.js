@@ -344,7 +344,7 @@ const ProductAdd = () => {
                                 <FormControlLabel value="재고사용안함" control={<Radio />} label="사용안함" />
                             </RadioGroup>
                             {stockUsage === "재고사용" && (
-                                <TableCell>재고 사용할거라고?!!</TableCell>
+                                <TableCell>재고 사용</TableCell>
                             
                             )}
                         </TableCell>
