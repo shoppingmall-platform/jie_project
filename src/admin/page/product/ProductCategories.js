@@ -3,6 +3,7 @@ import { Box, Button, TextField, List, ListItem, ListItemIcon, ListItemText, Tab
 import FolderIcon from '@mui/icons-material/Folder';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import BBox from '../../component/BBox';
 
 
 //이후 api 연결 후 통신
@@ -112,7 +113,7 @@ const ProductCategories = () => {
         sx={{
           width: '70%',
           height: '90%',
-          borderRadius: 1,
+          borderRadius: 3,
           marginTop: 2,
           display: 'flex',
           flexDirection: 'row',
@@ -122,36 +123,17 @@ const ProductCategories = () => {
           fontSize: '15px',
         }}
       >
-        <Box
-          sx={{
-            width: '40%',
-            height: '100%',
-            borderRadius: 1,
-            bgcolor: '#dcdcdc',
-            marginTop: 2,
-          }}
-        >
+        <BBox width= '40%' height = '100%'>
           {renderCategoryTree()}
-
-          
-        </Box>
+        </BBox>
         <Box
           sx={{
             width: '60%',
             height: '100%',
             display:'flex',
             flexDirection :'column'
-
           }}>
-        <Box
-          sx={{
-            width: '100%',
-            height: '70%',
-            borderRadius: 1,
-            bgcolor: '#dcdcdc',
-            marginTop: 2,
-          }}
-        >
+        <BBox width ='100%' height = '70%' >
           {selectedCategory ? (
             <div style={{ margin: '20px' }}>
               <h3>카테고리 정보</h3>
@@ -222,17 +204,8 @@ const ProductCategories = () => {
           ) : (
             <p style={{ margin: 20 }}>카테고리를 선택하세요</p>
           )}
-        </Box>
-        <Box
-          sx={{
-            width: '100%',
-            height: '30%',
-            borderRadius: 1,
-            bgcolor: '#dcdcdc',
-            marginTop: 2,
-          }}
-        >
-
+        </BBox>
+        <BBox  width ='100%' height ='30%' >
           <Box sx={{ padding: 2 }}>
             <h3>대분류 추가</h3>
             <TextField
@@ -252,7 +225,7 @@ const ProductCategories = () => {
             </Button>
           </Box>
 
-        </Box>
+        </BBox>
         </Box>
         
         

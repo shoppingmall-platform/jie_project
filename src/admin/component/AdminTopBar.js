@@ -12,7 +12,8 @@ const menuItems = [
       { label: "상품 목록", link: "./products/list" },
       { label: "상품 등록", link: "./products/add" },
       { label: "상품 관리", link: "./products/manage" },
-      { label: "카테고리", link: "./products/categories" }
+      { label: "카테고리", link: "./products/categories" },
+      { label: "옵션 관리", link: "./products/options" }
     ]
   },
   {

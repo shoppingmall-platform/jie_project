@@ -1,7 +1,7 @@
 import {React,useState} from 'react'
 import { Grid, Box, Paper, Button, Table, TableRow, TableCell, FormControl, Select } from '@mui/material'
 import { TableBar } from '@mui/icons-material'
-
+import BBox from '../../component/BBox'
 
 const ProductList = () => {
 
@@ -25,8 +25,10 @@ const ProductList = () => {
           width: '70%',
           height: 80,
           borderRadius: 1,
-          bgcolor: '#dcdcdc',
           marginTop: 2,
+          bgcolor: '#ffffff', // 흰색 배경
+          boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)', // 부드러운 그림자
+          border: '1px solid #e0e0e0',
           display:'flex',
           flexDirection:'row',
           gap:4,
@@ -41,15 +43,7 @@ const ProductList = () => {
         <p> 진열함 : n개</p>
         <p> 진열안함 : n개</p>
       </Box>
-      <Box
-        sx={{
-          width: '70%',
-          height: 300,
-          borderRadius: 1,
-          bgcolor: '#dcdcdc',
-          marginTop: 2,
-        }}
-      >
+      <BBox width="70%" height = "300px" >
         <Table>
           <TableRow>
             <TableCell align='center'>
@@ -63,23 +57,15 @@ const ProductList = () => {
         </Table>
         
        
-      </Box>
-      <Box>
+      </BBox>
+      <Box marginTop={2}>
         <Button>검색</Button>
         <Button>초기화</Button>
       </Box>
-      <Box
-        sx={{
-          width: '70%',
-          height: 400,
-          borderRadius: 1,
-          bgcolor: '#dcdcdc',
-          marginTop: 2,
-        }}
-      >
+      <BBox width="70%" height = "300px" >
         
     
-      </Box>
+      </BBox>
       <div style={{height:200}}/>
     </div>
   )
